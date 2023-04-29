@@ -1,7 +1,11 @@
 @import '../public/fonts/fonts.scss';
+@import 'variaveis.scss';
 
 *{
-  font-family: 'biennale-regular';
+  font-family: $fontRegular;
   font-size: 14px;
 }
 
+.oculto {
+  display: none;
+}
