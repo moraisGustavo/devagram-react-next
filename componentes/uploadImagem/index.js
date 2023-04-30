@@ -8,23 +8,24 @@ export function UploadImagem ({
     aoSetarAreferencia
 }) {
     const refereciaInput = useRef(null);
-
     useEffect(() => {
         if(!aoSetarAreferencia){
             return;
         }
-
         aoSetarAreferencia(refereciaInput?.current);
     }, [refereciaInput?.current]);
+
 
     const abrirSeletorArquivos =() => {
         refereciaInput?.current?.click();
     }
 
+
     const aoAlterarImagem = () => {
         if(!refereciaInput?.current?.files?.length){
             return;
         }
+
          
         const arquivo = refereciaInput?.current?.files[0];
         const fileReader = new FileReader();

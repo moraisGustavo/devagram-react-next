@@ -1,9 +1,15 @@
 @import '../public/fonts/fonts.scss';
 @import 'variaveis.scss';
+@import '../componentes/botao/botao.scss';
 
 *{
   font-family: $fontRegular;
   font-size: 14px;
+}
+
+.avatar{
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .oculto {

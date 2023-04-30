@@ -2,6 +2,8 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { UploadImagem } from '../componentes/uploadImagem'
 import { useRef, useState } from 'react'
+import Botao from '../componentes/botao';
+import Avatar from '../componentes/avatar';
 
 
 export default function Home() {
@@ -19,6 +21,13 @@ export default function Home() {
         setImagem={setImagem} 
         imagemPreview={imagem?.preview} 
         aoSetarAreferencia={(ref) => refereciaInput.current = ref}
+      />
+      <Avatar />
+      <Botao 
+        texto={'Login'} 
+        manipularClick={() => 
+          console.log('Botao Clicado')}
+          cor='primaria'
       />
     </>
   )
