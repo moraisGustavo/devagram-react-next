@@ -3,6 +3,7 @@ import Link from "next/link";
 import InputPublico from "../../componentes/inputPublico/index";
 import Botao from "../../componentes/botao";
 import { useState } from "react";
+import { useRouter } from "next/router";
 import { validarNome, validarSenha, validarConfirmarSenha, validarEmail} from '../../utils/validadores'
 import UsuarioService from '../../services/UsuarioService'
 
@@ -24,6 +25,7 @@ export default function Cadastro(){
     const [senha, setSenha] = useState("");
     const [confirmarSenha, setconfirmarSenha] = useState("");
     const [estaSubmetendo, setEstaSubmetendo] = useState(false);
+    const router =useRouter();
 
     const validarFormulario = () => {
         return (
@@ -32,7 +34,6 @@ export default function Cadastro(){
             && validarSenha(senha)
             && validarConfirmarSenha(senha, confirmarSenha)
         );
-
     }
 
     const aoSubmeter = async (e) => {
@@ -52,19 +53,21 @@ export default function Cadastro(){
             if (avatar?.arquivo) {
             corpoRequisicaocadastro.append("file", avatar.arquivo);
             }
-
             await usuarioService.cadastro(corpoRequisicaocadastro);
-            alert("Sucesso!")
-            // ToDo: Autenticar o usuario diretamente apos o cadastro
+            await usuarioService.login({
+                login: email,
+                senha
+            });
 
+            router.push('/');
         } catch (error) {
             alert(
                 "Erro ao cadastrar usuario. " + error?.response?.data?.erro
             );
         }
-
         setEstaSubmetendo(false);
     }
+
 
     return (
         <section className={`paginaCadastro paginaPublica`}>
@@ -83,7 +86,6 @@ export default function Cadastro(){
                         imagemPreviewClassName="avatar avatarPreview"
                         imagemPreview={avatar?.preview || imagemAvatar.src}
                         setImagem={setAvatar}
-
                     />
 
                     <InputPublico // Nome Completo
@@ -134,10 +136,11 @@ export default function Cadastro(){
                 </form>
 
 
-            <div className="rodapePaginaPublica">
+                <div className="rodapePaginaPublica">
                     <p>Já possui uma conta?</p>
                     <Link href="/">Faça seu login agora!</Link>
                 </div>
+                
             </div>
         </section>    
     );

@@ -6,7 +6,7 @@ import Botao from "../botao";
 import { validarEmail, validarSenha } from '../../utils/validadores'
 import UsuarioService from "../../services/UsuarioService";
 
-
+//Imagens Importadas
 import iconeEnvelope from "../../public/imagens/envelope.svg";
 import iconeKey from "../../public/imagens/key.svg";
 import imagemLogo from "../../public/imagens/logo.svg";
@@ -14,7 +14,7 @@ import imagemLogo from "../../public/imagens/logo.svg";
 
 const usuarioService = new UsuarioService();
 
-export default function Login() {
+export default function Login( {aposAutenticacao}) {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [estaSubmetendo, setEstaSubmetendo]= useState(false);
@@ -34,26 +34,25 @@ export default function Login() {
         if (!validarFormulario()){
             return;
         }
-
         setEstaSubmetendo(true);
-
         try {
             await usuarioService.login({
                 login:email,
                 senha
             });
+            
+            if (aposAutenticacao) {
+                aposAutenticacao();
+            }
 
-            //ToDo: redirecionar usuario para a feed
         } catch (error) {
             alert(
                 "Erro ao realizar login. " + error?.response?.data?.erro
             );
         }
-
         setEstaSubmetendo(false);
     }
 
- 
  
     return (
         <section className={`paginaLogin paginaPublica`}>
@@ -76,7 +75,7 @@ export default function Login() {
                         valor={email}
                         mensagemValidacao="O endereço informa é invalido"
                         exibirMensagemValidacao={email && !validarEmail(email)}
-                        />
+                    />
 
                     <InputPublico
                         imagem={iconeKey}
@@ -94,6 +93,7 @@ export default function Login() {
                         desabilitado={!validarFormulario() || estaSubmetendo}
                     />
                 </form>
+                
 
                 <div className="rodapePaginaPublica">
                     <p>Não Possui uma conta?</p>

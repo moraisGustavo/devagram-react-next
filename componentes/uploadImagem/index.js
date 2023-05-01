@@ -1,16 +1,16 @@
 import { useEffect, useRef } from "react";
 
-export function UploadImagem ({
-    className ='',
+export function UploadImagem({
+    className = '',
     setImagem,
     imagemPreview,
-    imagemPreviewClassName ='',
+    imagemPreviewClassName = '',
     aoSetarAreferencia
 }) {
     const refereciaInput = useRef(null);
 
     useEffect(() => {
-        if(!aoSetarAreferencia){
+        if (!aoSetarAreferencia) {
             return;
         }
 
@@ -18,17 +18,17 @@ export function UploadImagem ({
     }, [refereciaInput?.current]);
 
 
-    const abrirSeletorArquivos =() => {
+    const abrirSeletorArquivos = () => {
         refereciaInput?.current?.click();
     }
 
 
     const aoAlterarImagem = () => {
-        if(!refereciaInput?.current?.files?.length){
+        if (!refereciaInput?.current?.files?.length) {
             return;
         }
 
-         
+
         const arquivo = refereciaInput?.current?.files[0];
         const fileReader = new FileReader();
         fileReader.readAsDataURL(arquivo);
@@ -55,11 +55,11 @@ export function UploadImagem ({
             )}
             <input
                 type='file'
-                className='oculto' 
+                className='oculto'
                 accept="image/*"
                 ref={refereciaInput}
                 onChange={aoAlterarImagem}
-             />
+            />
         </div>
     );
 }
