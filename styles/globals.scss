@@ -63,3 +63,12 @@ input{
     display: block;
   }
 }
+
+.mensagemValidacao{
+  display: block;
+  color: $vermelho;
+  font-size: 90%;
+  margin-top: -20px;
+  margin-bottom: 15px;
+  font-family: $fontLight;
+}
