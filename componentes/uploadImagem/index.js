@@ -8,10 +8,12 @@ export function UploadImagem ({
     aoSetarAreferencia
 }) {
     const refereciaInput = useRef(null);
+
     useEffect(() => {
         if(!aoSetarAreferencia){
             return;
         }
+
         aoSetarAreferencia(refereciaInput?.current);
     }, [refereciaInput?.current]);
 
