@@ -1,25 +1,46 @@
 import Image from 'next/legacy/image';
-import Navegacao from './Navegacao';
 import { useState } from 'react';
+import Navegacao from './Navegacao';
+import ResultadoPesquisa from './ResultadoPesquisa';
+import UsuarioService from '../../services/UsuarioService';
 
 
 //IMPORTAÇAO DAS IMAGENS
-import logoHorizontal from '../../public/imagens/logoHorizontal.svg'
 import iconeLupa from '../../public/imagens/search.svg'
-import ResultadoPesquisa from './ResultadoPesquisa';
+import logoHorizontal from '../../public/imagens/logoHorizontal.svg'
+import { useRouter } from 'next/router';
 
+
+const usuarioService = new UsuarioService();
 
 export default function Header() {
     const [resultadoPesquisa, setResultadoPesquisa] = useState([]);
-    const [termoPesquisao, setTermoPesquisado] = useState([]);
+    const [termoPesquisado, setTermoPesquisado] = useState('');
+    const router = useRouter();
 
-    const aoPesquisar = (e) => {
+    const aoPesquisar = async (e) => {
         setTermoPesquisado(e.target.value);
         setResultadoPesquisa([]);
+
+        if (termoPesquisado.length < 3) {
+            return;
+        }
+        try {
+            const { data } = await usuarioService.pesquisar(termoPesquisado);
+            setResultadoPesquisa(data);
+        } catch (error) {
+            alert('Erro ao pesquisar usuario. ' + error?.response?.data?.erro);
+        }
     }
 
     const aoClicarResultadoPesquisa = (id) => {
-        console.log('aoClicarResultadoPesquisa', {id});
+        setResultadoPesquisa([]);
+        setTermoPesquisado('');
+        router.push(`/perfil/${id}`);
+    }
+
+    const redirecionarHome = () => {
+        router.push('/');
     }
 
     return (
@@ -28,6 +49,7 @@ export default function Header() {
                 {/* LOGO PRINCIPAL */}
                 <div className='logoHomeHeader'>
                     <Image
+                        onClick={redirecionarHome}
                         src={logoHorizontal}
                         alt='Logo Devagram'
                         layout='fill'
@@ -46,7 +68,7 @@ export default function Header() {
                     <input
                         type='text'
                         placeholder='Pesquisar'
-                        value={termoPesquisao}
+                        value={termoPesquisado}
                         onChange={aoPesquisar}
                     />
                 </div>
@@ -54,12 +76,12 @@ export default function Header() {
                 <Navegacao className='desktop' />
             </div>
 
-            { resultadoPesquisa.length > 0 && (
+            {resultadoPesquisa.length > 0 && (
                 <div className='resultadoPesquisaContainer'>
                     {resultadoPesquisa.map(r => (
-                        <ResultadoPesquisa 
+                        <ResultadoPesquisa
                             avatar={r.avatar}
-                            name={r.nome}
+                            nome={r.nome}
                             email={r.email}
                             key={r._id}
                             id={r._id}
@@ -67,9 +89,7 @@ export default function Header() {
                         />
                     ))}
                 </div>
-
             )}
-
         </header>
     );
 }
