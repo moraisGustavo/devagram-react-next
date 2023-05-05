@@ -105,6 +105,38 @@
 
 @media screen and (min-width: $desktopBreakpoint) {
     padding-top: 8px;
+
+    .postagem {
+        .avatar{
+            width: 42px;
+            height: 42px;
+        }
+
+        .rodapeDaPostagem{
+            .acoesDaPostagem{
+                > span {
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .containerFazerComentario{
+            margin-top: 10px;
+
+            .btnPublicacao{
+                border: none;
+                background-color: transparent;
+                color: $corPrimaria;
+                outline: none;
+                cursor: pointer;
+                font-size: 12px;
+                
+                &:hover{
+                    font-family: $fontBold;
+                }
+            }
+        }
+    }
 }
 
 }

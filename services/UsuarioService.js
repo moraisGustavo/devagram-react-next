@@ -1,8 +1,8 @@
-import HttpService from "./HttpServices";
+import HttpServices from "./HttpServices";
 import imagemAvatar from "../public/imagens/avatar.svg";
 
 
-export default class UsuarioService extends HttpService {
+export default class UsuarioService extends HttpServices {
     async login(credenciais){
         const {data} = await this.post('/login', credenciais);
         

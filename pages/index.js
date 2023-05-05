@@ -4,9 +4,8 @@ import Login from "../componentes/login";
 import UsuarioService from "../services/UsuarioService";
 
 const usuarioService = new UsuarioService();
-
 export default function Index() {
-  const [estaAutenticado, setEstaAutenticado] = useState(false);
+  const [estaAutenticado, setEstaAutenticado] = useState(null);
 
   useEffect(() => {
     setEstaAutenticado(
@@ -14,9 +13,13 @@ export default function Index() {
     );
   }, []);
 
-  if(estaAutenticado){
+  if(estaAutenticado === null){
+    return null;
+  }
+  
+  if (estaAutenticado) {
     return <Home />;
   }
 
-  return  <Login aposAutenticacao={() => setEstaAutenticado(true)} />;
+  return <Login aposAutenticacao={() => setEstaAutenticado(true)} />;
 }
