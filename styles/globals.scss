@@ -7,6 +7,7 @@
 @import '../pages/cadastro/cadastro.scss';
 @import '../componentes/layout/header.scss';
 @import '../componentes/layout/footer.scss';
+@import '../componentes/feed/feed.scss';
 
 *{
   font-family: $fontRegular;
@@ -18,8 +19,19 @@ html, body, #__next{
   margin: 0;
 }
 
+body{
+  @media screen and (min-width: $desktopBreakpoint) {
+    background-color: $cinza05;
+    background-image: url(../public/imagens/textura.svg);
+  }
+}
 
-
+.largura50pctDescktop{
+  @media screen and (min-width: $desktopBreakpoint) {
+      width: 50%;
+      margin: auto;
+  }
+}
 .avatar{
   border-radius: 50%;
   object-fit: cover;
@@ -93,4 +105,12 @@ input{
 strong{
   display: block;
   font-family: $fontBold;
+}
+
+link{
+  text-decoration: none;
+}
+
+a{
+  text-decoration: none;
 }
