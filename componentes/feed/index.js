@@ -7,9 +7,16 @@ const feedService = new FeedServices();
 export function Feed({ usuarioLogado }) {
     const [listaDePostagens, setListaDePostagens] = useState([]);
 
-    useEffect(async () => {
-        const { data } = await feedService.carregarPostagens();
-        console.log(data);
+    // useEffect(async () => {
+    //     const { data } = await feedService.carregarPostagens();
+    //     console.log(data);
+
+    useEffect(() => {
+        async function carregarPostagens() {
+          const { data } = await feedService.carregarPostagens();
+          console.log(data);
+        }
+        carregarPostagens();
 
         setListaDePostagens([
             {
@@ -17,7 +24,7 @@ export function Feed({ usuarioLogado }) {
                 usuario: {
                     id: '1',
                     nome: 'Gustavo',
-                    avatar: null,
+                    avatar: 'https://i.pinimg.com/564x/5e/08/dc/5e08dcac4f908e58814bdabf12ac8b0d.jpg',
                 },
                 fotoDoPost: 'https://img.freepik.com/vetores-premium/guerreiro-anao-de-rpg-colorido-em-vetor_875525-1.jpg',
                 descricao: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere iste id, labore repellat dolores explicabo libero cumque nemo sit in enim accusantium ullam corporis autem illo at, ad amet fugiat.',
