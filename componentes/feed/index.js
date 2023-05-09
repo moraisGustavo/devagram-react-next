@@ -37,7 +37,7 @@ export function Feed({ usuarioLogado }) {
                 id: '2',
                 usuario: {
                     id: '2',
-                    nome: 'Pamella',
+                    nome: 'Fulano',
                     avatar: null,
                 },
                 fotoDoPost: 'https://i.pinimg.com/236x/f6/53/c5/f653c5711498653860b28542d0631f4b.jpg',
@@ -45,7 +45,7 @@ export function Feed({ usuarioLogado }) {
                 likes: [],
                 comentarios: [{
                     nome: 'Ciclano',
-                    mensagem: 'Muito Obg Gpt'
+                    mensagem: 'Booooa'
                 }]
             },
         ]);
