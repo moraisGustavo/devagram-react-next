@@ -1,14 +1,14 @@
 import Link from "next/link";
 import Avatar from "../avatar";
 import Image from "next/legacy/image";
+import { useState } from "react";
+import { FazerComentario } from "./FazerComentario";
 
 // IMPORTACAO DAS IMAGENS  
 import iconeCurti from '../../public/imagens/curtir.svg'
 import iconeCurtido from '../../public/imagens/curtido.svg'
 import iconeComentario from '../../public/imagens/comentario.svg'
 import iconeComentarioMarcado from '../../public/imagens/comentarioMarcado.svg'
-import { useState } from "react";
-import { FazerComentario } from "./FazerComentario";
 
 
 const tamanhoLimiteDescricao = 90;

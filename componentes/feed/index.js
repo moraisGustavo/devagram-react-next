@@ -7,11 +7,6 @@ const feedService = new FeedService();
 export function Feed({ usuarioLogado }) {
     const [listaDePostagens, setListaDePostagens] = useState([]);
 
-    // useEffect(async () => {
-    //     const { data } = await feedService.carregarPostagens();
-    //     console.log(data);
-
-
     // useEffect(() => {
     //     async function carregarPostagens() {
     //         const { data } = await feedService.carregarPostagens();
@@ -41,27 +36,28 @@ export function Feed({ usuarioLogado }) {
 
     useEffect(() => {
         async function carregarPostagens() {
-          const { data } = await feedService.carregarPostagens();
-          const postagensFormatadas = data.map((postagem) => ({
-            id: postagem._id,
-            usuario: {
-              id: postagem.userId,
-              nome: postagem.usuario.nome,
-              avatar: postagem.usuario.avatar,
-            },
-            fotoDoPost: postagem.foto,
-            descriçao: postagem.descricao,
-            curtidas: postagem.likes,
-            comentarios: postagem.comentarios.map((c) => ({
-              nome: c.nome,
-              mensagem: c.comentario,
-            })),
-          }));
-          setListaDePostagens(postagensFormatadas);
+            const { data } = await feedService.carregarPostagens();
+            console.log(data);
+            const postagensFormatadas = data.map((postagem) => ({
+                id: postagem._id,
+                usuario: {
+                    id: postagem.userId,
+                    nome: postagem.usuario.nome,
+                    avatar: postagem.usuario.avatar,
+                },
+                fotoDoPost: postagem.foto,
+                descriçao: postagem.descricao,
+                curtidas: postagem.likes,
+                comentarios: postagem.comentarios.map((c) => ({
+                    nome: c.nome,
+                    mensagem: c.comentarios,
+                })),
+            }));
+            setListaDePostagens(postagensFormatadas);
         }
-      
+
         carregarPostagens();
-      }, [usuarioLogado]);
+    }, [usuarioLogado]);
 
 
     //     setListaDePostagens([
