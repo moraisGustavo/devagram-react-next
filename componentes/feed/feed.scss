@@ -30,14 +30,13 @@
                 width: 100%;
                 height: auto;
                 max-height: 360px;
-                object-fit: cover;
+                object-fit: contain;
             }
         }
 
         .rodapeDaPostagem {
             padding: 5px 16px;
             color: $cinza04;
-            margin-bottom: 15px;
 
             strong.nomeUsuario {
                 font-size: 12px;
