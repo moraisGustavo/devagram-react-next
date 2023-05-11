@@ -6,7 +6,6 @@ const feedService = new FeedService();
 
 export function Feed({ usuarioLogado }) {
     const [listaDePostagens, setListaDePostagens] = useState([]);
-
  
     useEffect(() => {
         async function carregarPostagens() {
@@ -31,6 +30,8 @@ export function Feed({ usuarioLogado }) {
         }
 
         carregarPostagens();
+
+ 
     }, [usuarioLogado]);
 
     return (
