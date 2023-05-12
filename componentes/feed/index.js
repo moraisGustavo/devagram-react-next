@@ -28,10 +28,7 @@ export function Feed({ usuarioLogado }) {
             }));
             setListaDePostagens(postagensFormatadas);
         }
-
-        carregarPostagens();
-
- 
+        carregarPostagens(); 
     }, [usuarioLogado]);
 
     return (
