@@ -3,6 +3,7 @@ import Avatar from "../avatar";
 import Image from "next/legacy/image";
 import { useState } from "react";
 import { FazerComentario } from "./FazerComentario";
+import FeedService from "../../services/FeedService";
 
 // IMPORTACAO DAS IMAGENS  
 import iconeCurti from '../../public/imagens/curtir.svg'
@@ -10,17 +11,20 @@ import iconeCurtido from '../../public/imagens/curtido.svg'
 import iconeComentario from '../../public/imagens/comentario.svg'
 import iconeComentarioMarcado from '../../public/imagens/comentarioMarcado.svg'
 
-
 const tamanhoLimiteDescricao = 90;
+const feedService = new FeedService();
 
 export default function Postagem({
+    id,
     usuario,
     fotoDoPost,
     descricao,
     comentarios,
-    usuarioLogado
+    usuarioLogado,
+    curtidas
 }) {
-
+    const [curtidasPostagem, setCurtidasPostagem] = useState(curtidas);
+    const [comentariosPostagem, setComentariosPostagem] = useState(comentarios);
     const [deveExibirSecaoParaComentar, setDeveExibirSecaoParaComentar] = useState(false);
     const [tamanhoAtualDescricao, setTamanhoAtualDescricao] = useState(
         tamanhoLimiteDescricao
@@ -40,6 +44,58 @@ export default function Postagem({
         return mensagem;
     }
 
+    const obterIconeComentario = () => {
+        return deveExibirSecaoParaComentar
+            ? iconeComentarioMarcado
+            : iconeComentario;
+    }
+
+    const comentar = async (comentario) => {
+        try {
+            await feedService.adicionarComentario(id, comentario);
+            setDeveExibirSecaoParaComentar(false);
+            setComentariosPostagem([
+                ...comentariosPostagem,
+                {
+                    nome: usuarioLogado.nome,
+                    mensagem: comentario
+                }
+            ]);
+            return true;
+        } catch (e) {
+            alert(`Erro ao fazer comentario! ` + (e?.response?.data?.erro || ''));
+        }
+    }
+    
+    const usuarioLogadoCurtiuPostagem = () => {
+        return curtidasPostagem.includes(usuarioLogado.id);
+    }
+
+    const alterarCurtida = async () => {
+        try {
+            await feedService.alterarCurtida(id);
+            if (usuarioLogadoCurtiuPostagem()) {
+                // TIRA O USUARIO LOGADO DA LISTA DE CURTIDAS
+                setCurtidasPostagem(
+                    curtidasPostagem.filter(idUsuarioQueCurtiu => idUsuarioQueCurtiu !== usuarioLogado.id)
+                );
+            }else{
+                // ADICIONA O USUARIO LOGADO NA LISTA DE CURTIDAS
+                setCurtidasPostagem([
+                    ...curtidasPostagem,
+                    usuarioLogado.id
+                ])
+            }
+        } catch (e) {
+            alert (`Erro ao curti a publicaçao` + (e?.response?.data?.erro || ''));
+        }
+    }
+
+    const obterIconeCurtir =() => {
+        return usuarioLogadoCurtiuPostagem()
+            ? iconeCurtido
+            : iconeCurti
+    }
 
     return (
         <div className="postagem">
@@ -57,14 +113,14 @@ export default function Postagem({
             <div className="rodapeDaPostagem">
                 <div className="acoesDaPostagem">
                     <Image
-                        src={iconeCurti}
+                        src={obterIconeCurtir()}
                         alt="icone curtir"
                         height={20}
                         width={20}
-                        onClick={() => console.log('Curtido')}
+                        onClick={alterarCurtida}
                     />
                     <Image
-                        src={iconeComentario}
+                        src={obterIconeComentario()}
                         alt="icone comentario"
                         height={20}
                         width={20}
@@ -72,7 +128,7 @@ export default function Postagem({
                     />
 
                     <span className="quantidadeDeCurtidas">
-                        Curtido por <strong>32 pessoas</strong>
+                        Curtido por <strong>{curtidasPostagem.length} pessoas</strong>
                     </span>
                 </div>
 
@@ -92,7 +148,7 @@ export default function Postagem({
                 </div>
 
                 <div className="comentariosDaPostagem">
-                    {comentarios.map((comentario, i) => (
+                    {comentariosPostagem.map((comentario, i) => (
                         <div className="comentario" key={i}>
                             <strong className="nomeUsuario">{comentario.nome}</strong>
                             <p className="descricao">{comentario.mensagem}</p>
@@ -103,6 +159,7 @@ export default function Postagem({
 
             {deveExibirSecaoParaComentar &&
                 <FazerComentario
+                    comentar={comentar}
                     usuarioLogado={usuarioLogado}
                 />
             }
