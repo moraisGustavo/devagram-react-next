@@ -1,9 +1,30 @@
-import comAutorizacao from "../../../hoc/comAutorizacao"
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import  Feed  from "../../../componentes/feed";
+import comAutorizacao from "../../../hoc/comAutorizacao";
+import CabecalhoPerfil from "../../../componentes/cabecalhoPerfil";
 
-function Perfil() {
+//IMPORTAÇAO IMAGENS
+
+function Perfil({ usuarioLogado }) {
+    const [usuario, setUsuario] = useState({});
+    const router = useRouter();
+
+    useEffect(() => {
+        const async = setUsuario({
+            nome:'Gustavo Morais'
+        })
+    }, [router.query.id]);
+    
     return (
-        <h1>Perfil</h1>
-    )
+        <div className="paginaPerfil">
+            <CabecalhoPerfil 
+                usuarioLogado={usuarioLogado}
+                usuario={usuario}
+            />
+            <Feed usuarioLogado={usuarioLogado}/>
+        </div>
+    );
 }
 
 export default comAutorizacao(Perfil);
