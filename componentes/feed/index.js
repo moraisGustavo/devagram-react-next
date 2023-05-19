@@ -11,7 +11,7 @@ export default function Feed({ usuarioLogado, usuarioPerfil }) {
         async function carregarPostagens() {
             const { data } = await feedService.carregarPostagens(usuarioPerfil?._id);
             setListaDePostagens([]);
-            
+
             const postagensFormatadas = data.map((postagem) => (
                 {
                     id: postagem._id,
@@ -29,15 +29,15 @@ export default function Feed({ usuarioLogado, usuarioPerfil }) {
                     }
                     )),
                 }));
-                setListaDePostagens(postagensFormatadas);
+            setListaDePostagens(postagensFormatadas);
         }
         carregarPostagens();
     }, [usuarioLogado, usuarioPerfil]);
-    
-    if(!listaDePostagens.length){
+
+    if (!listaDePostagens.length) {
         return null;
     }
-    
+
     return (
         <div className="feedContainer larguraDesktop">
             {listaDePostagens.map(dadosPostagem => (
@@ -46,7 +46,8 @@ export default function Feed({ usuarioLogado, usuarioPerfil }) {
                     {...dadosPostagem}
                     usuarioLogado={usuarioLogado}
                 />
-            ))}
+            ))
+            }
         </div>
     )
 }

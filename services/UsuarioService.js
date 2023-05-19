@@ -34,6 +34,10 @@ export default class UsuarioService extends HttpServices {
         return this.get(`/pesquisa?id=${idUsuario}`); 
     }
 
+    async alternarSeguir (idUsuario) {
+        return this.put(`/seguir?id=${idUsuario}`);
+    }
+
     
     obterInformaçoesDoUsuarioLogado() {
         return {
