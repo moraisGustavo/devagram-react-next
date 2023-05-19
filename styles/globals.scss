@@ -28,9 +28,9 @@ body{
   }
 }
 
-.largura50pctDescktop{
+.larguraDesktop{
   @media screen and (min-width: $desktopBreakpoint) {
-      width: 50%;
+      width: 30%;
       margin: auto;
   }
 }

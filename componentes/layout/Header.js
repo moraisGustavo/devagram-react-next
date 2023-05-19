@@ -9,6 +9,7 @@ import UsuarioService from '../../services/UsuarioService';
 import iconeLupa from '../../public/imagens/search.svg'
 import logoHorizontal from '../../public/imagens/logoHorizontal.svg'
 import { useRouter } from 'next/router';
+import IdUsuario from '../../pages/perfil/[id]';
 
 
 const usuarioService = new UsuarioService();

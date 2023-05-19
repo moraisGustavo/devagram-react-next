@@ -1,7 +1,6 @@
 .feedContainer {
     padding-bottom: 60px;
-    background-color: $branco;
-    margin-top: 16px;
+    // background-color: $branco;
 
 
     .postagem {
@@ -105,14 +104,28 @@
 
 @media screen and (min-width: $desktopBreakpoint) {
     padding-top: 8px;
+    margin-top: 0px;
+
 
     .postagem {
+        border-radius: 10px;
+        background-color: $branco;
+        padding: 5px 0;
+        box-sizing: border-box;
+    margin-top: 10px;
+
+
+        .cabecalhoPostagem{
+        cursor: pointer;
+
+        }
         .avatar{
             width: 42px;
             height: 42px;
         }
 
         .rodapeDaPostagem{
+            margin-bottom: 10px;
             .acoesDaPostagem{
                 > span {
                     cursor: pointer;
