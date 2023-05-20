@@ -1,0 +1,127 @@
+.paginaPublicacao {
+    background-color: $branco;
+
+    .cabecalhoComAcoes{
+        &.segundaEtapa{
+            > span{
+                cursor: pointer;
+            }
+            
+            h3{
+                padding-left: 17%;
+            }
+
+        }
+    }
+
+    .conteudoPaginaPublicacao {
+
+        .primeiraEtapaPublicacao {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .uploadImagemContainer {
+                cursor: pointer;
+                width: 100%;
+                text-align: center;
+
+                .imagemPreviewContainer {
+                    margin: 30px auto;
+
+                    img {
+                        object-fit: cover;
+                    }
+
+                    .previewImagemPublicacao {
+                        height: 150px;
+                        width: 150px;
+                    }
+
+                    .previewImagemSelecionada {
+                        height: 250px;
+                        width: 250px;
+                    }
+                }
+            }
+
+            .btn {
+                background-color: $corPrimaria03;
+                color: $branco;
+                width: 60%;
+                margin: auto;
+                padding: 12px;
+                cursor: pointer;
+
+                &:hover {
+                    border: none;
+                    opacity: 0.7;
+                }
+            }
+        }
+
+        .segundaEtapaPublicacao {
+            display: flex;
+            justify-content: center;
+            padding: 16px;
+
+            .uploadImagemContainer {
+                .imagemPreviewContainer {
+                    height: 80px;
+                    width: 80px;
+
+                    img {
+                        height: 100%;
+                        width: 100%;
+                        object-fit: cover;
+                    }
+                }
+            }
+
+            textarea{
+                border: none;
+                outline: none;
+                resize: none;
+                margin: 0 16px;
+                flex: 1;
+                font-size: 12px;
+                font-family: $fontLight;
+                color: $cinza02;
+            }
+        }
+    }
+
+    @media screen and (min-width: $desktopBreakpoint) {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        .conteudoPaginaPublicacao {
+            .primeiraEtapaPublicacao {
+
+                .uploadImagemContainer {
+
+                    .imagemPreviewContainer {
+                        margin-bottom: 10px;
+                    }
+                }
+
+                .textoDragAndDrop {
+                    text-align: center;
+                    color: $cinza04;
+                    margin-bottom: 50px;
+                }
+            }
+
+            .segundaEtapaPublicacao{
+                .uploadImagemContainer{
+                    .imagemPreviewContainer{
+                        width: 160px;
+                        height: 160px;
+                    }
+                }
+            }
+        }
+    }
+}

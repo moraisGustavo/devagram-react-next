@@ -23,13 +23,17 @@ export function UploadImagem({
     }
 
 
-    const aoAlterarImagem = () => {
+    const aoAlterarImagem = async () => {
         if (!refereciaInput?.current?.files?.length) {
             return;
         }
 
 
         const arquivo = refereciaInput?.current?.files[0];
+        obterUrlImagemEAtualizarEstado(arquivo);
+    }
+
+    const obterUrlImagemEAtualizarEstado = (arquivo) => {
         const fileReader = new FileReader();
         fileReader.readAsDataURL(arquivo);
         fileReader.onloadend = () => {
@@ -40,9 +44,21 @@ export function UploadImagem({
         }
     }
 
+    const aoSoltarImagem = (e) => {
+        e.preventDefault();
+        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+            const arquivo = e.dataTransfer.files[0];
+            obterUrlImagemEAtualizarEstado(arquivo);
+        }
+    }
 
     return (
-        <div className={`uploadImagemContainer ${className}`} onClick={abrirSeletorArquivos}>
+        <div
+            className={`uploadImagemContainer ${className}`}
+            onClick={abrirSeletorArquivos}
+            onDragOver={e => e.preventDefault()}
+            onDrop={aoSoltarImagem}
+        >
             {imagemPreview && (
                 <div className="imagemPreviewContainer">
                     <img

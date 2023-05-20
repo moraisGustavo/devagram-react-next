@@ -10,6 +10,7 @@
 @import '../componentes/feed/feed.scss';
 @import '../componentes/cabecalhoComAcoes/cabecalhoComAcoes.scss';
 @import '../pages/perfil/perfil.scss';
+@import '../pages/publicacao/publicacaso.scss';
 
 *{
   font-family: $fontRegular;
@@ -30,7 +31,7 @@ body{
 
 .larguraDesktop{
   @media screen and (min-width: $desktopBreakpoint) {
-      width: 30%;
+      width: 50%;
       margin: auto;
   }
 }
