@@ -3,6 +3,7 @@ import imagemAvatar from "../public/imagens/avatar.svg";
 
 
 export default class UsuarioService extends HttpServices {
+    // LOGIN
     async login(credenciais){
         const {data} = await this.post('/login', credenciais);
         
@@ -17,8 +18,22 @@ export default class UsuarioService extends HttpServices {
             localStorage.setItem("avatar", usuario.data.avatar);
         }
     }
+
+    // lOGOUT
+    async logout() {
+        localStorage.removeItem("nome");
+        localStorage.removeItem("email");
+        localStorage.removeItem("token");
+        localStorage.removeItem("id");
+        localStorage.removeItem("avatar");
+    }
+
     async cadastro(dados) {
         return this.post('/cadastro', dados);        
+    }
+
+    async atualizarPerfil(dados){
+        return this.put('/usuario', dados);
     }
 
     estaAtuenticado() {
@@ -47,6 +62,8 @@ export default class UsuarioService extends HttpServices {
             avatar: localStorage.getItem('avatar')
         }
     }
+
+
 
 
 }

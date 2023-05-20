@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Feed from "../../../componentes/feed";
-import comAutorizacao from "../../../hoc/comAutorizacao";
-import CabecalhoPerfil from "../../../componentes/cabecalhoPerfil";
-import UsuarioService from "../../../services/UsuarioService";
+import Feed from "../../componentes/feed";
+import comAutorizacao from "../../hoc/comAutorizacao";
+import CabecalhoPerfil from "../../componentes/cabecalhoPerfil";
+import UsuarioService from "../../services/UsuarioService";
 
 const usuarioService = new UsuarioService();
 
@@ -20,7 +20,7 @@ export function Perfil({ usuarioLogado }) {
           : idUsuario
       );
       return data;
-    } catch (e) {
+    } catch (error) {
       alert(`Erro ao obter perfil do usuario.`);
     }
   }

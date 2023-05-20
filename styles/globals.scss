@@ -116,3 +116,15 @@ link{
 a{
   text-decoration: none;
 }
+
+.divisoria{
+  margin: 0 auto;
+  border: none;
+  background-color: $cinza01;
+  height: 1px;
+
+  @media screen and (min-width: $desktopBreakpoint) {
+    margin: 0 auto;
+    width: 94%;
+  }
+}

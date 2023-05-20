@@ -1,32 +1,42 @@
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import UsuarioService from "../../services/UsuarioService";
 import CabecalhoComAcoes from "../cabecalhoComAcoes";
-import iconeSetaEsquerda from "../../public/imagens/setaEsquerda.svg"
 import Avatar from "../avatar";
 import Botao from "../botao";
-import { useEffect, useState } from "react";
-import UsuarioService from "../../services/UsuarioService";
-import { useRouter } from "next/router";
+import Image from "next/image";
+
+//Imagens Importadas
+import iconeSetaEsquerda from "../../public/imagens/setaEsquerda.svg"
+import iconeLogOut from "../../public/imagens/log-out.svg"
+
 
 const usuarioService = new UsuarioService;
 
 export default function CabecalhoPerfil({
-    usuario
+    usuario,
+    estaNoPerfilPessoal
 }) {
 
     const [estaSeguindoOUsuaio, setEstaSeguindoOUsuario] = useState(false);
     const [quantidadeSeguidores, setQuantidadeSeguidores] = useState(0);
     const router = useRouter();
-   
+
     useEffect(() => {
-        if (!usuario){
+        if (!usuario) {
             return;
         }
 
         setEstaSeguindoOUsuario(usuario.segueEsseUsuario);
         setQuantidadeSeguidores(usuario.seguidores);
-    },[usuario]);
+    }, [usuario]);
 
     const obterTextoBotaoSeguir = () => {
-        if(estaSeguindoOUsuaio){
+        if (estaNoPerfilPessoal) {
+            return 'Editar Perfil'
+        }
+
+        if (estaSeguindoOUsuaio) {
             return 'Deixar de Seguir';
         }
 
@@ -34,19 +44,23 @@ export default function CabecalhoPerfil({
     }
 
     const obterCorBotaoSeguir = () => {
-        if (estaSeguindoOUsuaio) {
+        if (estaSeguindoOUsuaio || estaNoPerfilPessoal) {
             return 'invertido';
         }
         return 'primaria'
     };
 
-    const manipularClickCliqueBotaoSeguir = async () => {
+    const manipularCliqueBotaoPrincipal = async () => {
+        if (estaNoPerfilPessoal) {
+            return router.push('/perfil/editar');
+        }
+
         try {
             await usuarioService.alternarSeguir(usuario._id);
             setQuantidadeSeguidores(
-                estaSeguindoOUsuaio 
-                    ? (quantidadeSeguidores -1) 
-                    : (quantidadeSeguidores +1)
+                estaSeguindoOUsuaio
+                    ? (quantidadeSeguidores - 1)
+                    : (quantidadeSeguidores + 1)
             );
             setEstaSeguindoOUsuario(!estaSeguindoOUsuaio);
         } catch (error) {
@@ -58,15 +72,41 @@ export default function CabecalhoPerfil({
         router.back();
     }
 
+    const logout = () => {
+        usuarioService.logout();
+        router.replace('/');
+    }
+
+    const obterElementoDireitaCabecalho = () => {
+        if (estaNoPerfilPessoal) {
+            return (
+                <Image
+                    src={iconeLogOut}
+                    alt="Icone Logout"
+                    onClick={logout}
+                    width={25}
+                    height={25}
+                />
+            )
+        }
+
+        return null;
+    }
+
     return (
         <div className="cabecalhoPerfil larguraDesktop ">
             <CabecalhoComAcoes
-                iconeSetaEsquerda={iconeSetaEsquerda}
+                iconeSetaEsquerda={
+                    estaNoPerfilPessoal
+                        ? null
+                        : iconeSetaEsquerda
+                }
                 aoClicarAcaoEsquerda={aoClicarSetaEsquerda}
                 titulo={usuario.nome}
+                elementoDireita={obterElementoDireitaCabecalho()}
             />
 
-            <hr  className="bordaCabecalhoPerfil"/>
+            <hr className="divisoria" />
 
             <div className="statusPerfil">
                 <Avatar src={usuario.avatar} />
@@ -88,13 +128,14 @@ export default function CabecalhoPerfil({
                         </div>
                     </div>
 
-                    <Botao  
+                    <Botao
                         texto={obterTextoBotaoSeguir()}
                         cor={obterCorBotaoSeguir()}
-                        manipularClick={manipularClickCliqueBotaoSeguir}
+                        manipularClick={manipularCliqueBotaoPrincipal}
                     />
                 </div>
             </div>
+            <hr className="divisoria mobile" />
         </div>
     )
 }
