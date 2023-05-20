@@ -80,6 +80,12 @@
 
                 }
             }
+
+            .comentariosDaPostagem{
+                max-height: 100px;
+                overflow-y: auto;
+                margin-top: 10px;
+            }
         }
 
         .containerFazerComentario {
@@ -87,6 +93,7 @@
             align-items: center;
             padding: 0 12px;
             margin-bottom: 16px;
+            max-height: 100px;
 
             textarea{
                 resize: none;

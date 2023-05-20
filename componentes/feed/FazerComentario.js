@@ -34,10 +34,11 @@ export function FazerComentario({ usuarioLogado, comentar }) {
                 onKeyDown={aoPressionarQualquerTecla}
                 value = {comentario}
                 placeholder="Adicione um comentario..."
+                autoFocus
             >
             </textarea>
 
-            <button type="button" className="btnPublicacao desktop" onClick={fazerComentario}>
+            <button type="button" className="btnPublicacao desktop" onClick={fazerComentario} >
                 Publicar
             </button>
         </div>
