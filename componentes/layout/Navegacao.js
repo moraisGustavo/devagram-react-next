@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import imgHome from '../../public/imagens/home.svg'
 import imgHomeAtivo from '../../public/imagens/homeAtivo.svg'
 import imgPublicacao from '../../public/imagens/publicacao.svg'
-import imgPublicacaoAtiva from '../../public/imagens/PublicacaoAtiva.svg'
+import imgPublicacaoAtiva from '../../public/imagens/publicacaoAtiva.svg'
 import imgUser from '../../public/imagens/user.svg'
 import imgUserAtivo from '../../public/imagens/userAtivo.svg'
 

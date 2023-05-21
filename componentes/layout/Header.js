@@ -1,5 +1,6 @@
-import Image from 'next/legacy/image';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
+import Image from 'next/legacy/image';
 import Navegacao from './Navegacao';
 import ResultadoPesquisa from './ResultadoPesquisa';
 import UsuarioService from '../../services/UsuarioService';
@@ -8,8 +9,6 @@ import UsuarioService from '../../services/UsuarioService';
 //IMPORTAÇAO DAS IMAGENS
 import iconeLupa from '../../public/imagens/search.svg'
 import logoHorizontal from '../../public/imagens/logoHorizontal.svg'
-import { useRouter } from 'next/router';
-import IdUsuario from '../../pages/perfil/[id]';
 
 
 const usuarioService = new UsuarioService();
