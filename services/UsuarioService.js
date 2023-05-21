@@ -1,8 +1,8 @@
-import HttpServices from "./HttpServices";
+import DevagramApiServices from "./DevagramApiServices";
 import imagemAvatar from "../public/imagens/avatar.svg";
 
 
-export default class UsuarioService extends HttpServices {
+export default class UsuarioService extends DevagramApiServices {
     // LOGIN
     async login(credenciais){
         const {data} = await this.post('/login', credenciais);
