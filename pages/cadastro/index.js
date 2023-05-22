@@ -8,7 +8,7 @@ import { validarNome, validarSenha, validarConfirmarSenha, validarEmail} from '.
 import UsuarioService from '../../services/UsuarioService'
 
 //Imagens Importadas
-import imagemLogo from "../../public/imagens/logo.svg";
+import imagemLogo from "../../public/imagens/logo-principal.svg";
 import iconeUserAtivo from "../../public/imagens/userAtivo.svg";
 import iconeEnvelope from "../../public/imagens/envelope.svg";
 import iconeKey from "../../public/imagens/key.svg";

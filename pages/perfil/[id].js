@@ -29,17 +29,7 @@ export function Perfil({ usuarioLogado }) {
     return router.query.id === 'eu';
   }
 
-  // useEffect(async () => {
-  //     if(!router.query.id){
-  //         return;
-  //     }
-
-  //     const dadosPerfil = await obterPerfil(router.query.idUsuario);
-  //     setUsuario({
-  //         nome: 'Gustavo Morais'
-  //     });
-  // },[router.query.id]);
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const carregarPerfil = async () => {
       if (!router.query.id) {

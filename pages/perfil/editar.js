@@ -18,6 +18,7 @@ function EditarPerfil({ usuarioLogado}) {
     const [nome, setNome] = useState('');
     const router = useRouter();
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(()=>{
         if(!usuarioLogado){
             return;

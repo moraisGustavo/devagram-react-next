@@ -9,7 +9,7 @@ import UsuarioService from "../../services/UsuarioService";
 //Imagens Importadas
 import iconeEnvelope from "../../public/imagens/envelope.svg";
 import iconeKey from "../../public/imagens/key.svg";
-import imagemLogo from "../../public/imagens/logo.svg";
+import imagemLogo from "../../public/imagens/logo-principal.svg";
 
 
 const usuarioService = new UsuarioService();

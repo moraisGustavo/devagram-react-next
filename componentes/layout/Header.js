@@ -8,7 +8,7 @@ import UsuarioService from '../../services/UsuarioService';
 
 //IMPORTAÇAO DAS IMAGENS
 import iconeLupa from '../../public/imagens/search.svg'
-import logoHorizontal from '../../public/imagens/logoHorizontal.svg'
+import logoHorizontal from '../../public/imagens/logo-horizontal.svg'
 
 
 const usuarioService = new UsuarioService();
