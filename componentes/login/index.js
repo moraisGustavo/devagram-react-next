@@ -73,7 +73,7 @@ export default function Login( {aposAutenticacao}) {
                         tipo="email"
                         aoAlterarValor={e => setEmail(e.target.value)}
                         valor={email}
-                        mensagemValidacao="O endereço informa é invalido"
+                        mensagemValidacao="O endereço informado é invalido"
                         exibirMensagemValidacao={email && !validarEmail(email)}
                     />
 
